@@ -1,0 +1,68 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 GLOBAL           Reset_Handler
+    2 00000000                 AREA             Reset, CODE, READONLY
+    3 00000000         Reset_Handler
+    4 00000000                 ENTRY
+    5 00000000         ; test data is xtime(D4) = B3  (ans store in r1)
+    6 00000000 E3A000D4        MOV              r0 , #0xD4  ; r0 = 0xD4 = input
+                                                            
+    7 00000004         
+    8 00000004 E1A00080        LSL              r0 , r0 , #1 ; shift b left one
+                                                             bit
+    9 00000008 E1A01000        MOV              r1, r0      ;  
+   10 0000000C E20110FF        AND              r1 , r1, #0xFF 
+                                                            ;clear the 8th bit
+   11 00000010 E2102C01        ANDS             r2, r0, #0x100 ; check 8th bit 
+                                                            is 1 or not
+   12 00000014 0A000000        BEQ              Done        ; if 8th bit is zer
+                                                            o then done
+   13 00000018 E221101B        EOR              r1, r1 , #0x1B ; else to XOR wi
+                                                            th 1B
+   14 0000001C         
+   15 0000001C         
+   16 0000001C EAFFFFFE 
+                       Done    B                Done        ;
+   17 00000020         
+   18 00000020                 END
+Command Line: --debug --xref --diag_suppress=9931 --apcs=interwork --depend=.\o
+bjects\startup.d -o.\objects\startup.o -IC:\Keil_v5\ARM\RV31\INC -IC:\Keil_v5\A
+RM\CMSIS\Include -IC:\Keil_v5\ARM\INC\Philips --predefine="__UVISION_VERSION SE
+TA 537" --list=.\listings\startup.lst Startup.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+Done 0000001C
+
+Symbol: Done
+   Definitions
+      At line 16 in file Startup.s
+   Uses
+      At line 12 in file Startup.s
+      At line 16 in file Startup.s
+
+Reset 00000000
+
+Symbol: Reset
+   Definitions
+      At line 2 in file Startup.s
+   Uses
+      None
+Comment: Reset unused
+Reset_Handler 00000000
+
+Symbol: Reset_Handler
+   Definitions
+      At line 3 in file Startup.s
+   Uses
+      At line 1 in file Startup.s
+Comment: Reset_Handler used once
+3 symbols
+334 symbols in table
